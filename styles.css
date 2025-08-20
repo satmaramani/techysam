@@ -1104,7 +1104,32 @@ section {
 .award-info p {
     color: #6b7280;
     font-size: 0.9rem;
-    margin: 0;
+    margin: 0 0 0.75rem 0;
+}
+
+.award-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.award-link:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.award-link i {
+    font-size: 0.75rem;
 }
 
 /* AI Spaces Section */
