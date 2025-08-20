@@ -9,3 +9,4 @@ Disallow: /temp/
 
 # Sitemap location
 Sitemap: https://techysam.vercel.app/sitemap.xml
+Sitemap: https://techysam.vercel.app/sitemap.txt
