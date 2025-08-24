@@ -24,7 +24,7 @@ const seoConfig = {
     
     // Analytics
     analytics: {
-        googleAnalytics: "GA_MEASUREMENT_ID", // Replace with actual GA ID
+        googleAnalytics: "G-7XPZHRS05K", // Replace with actual GA ID
         googleTagManager: "GTM_XXXXXXX", // Replace with actual GTM ID
         facebookPixel: "FB_PIXEL_ID" // Replace with actual FB Pixel ID
     },
