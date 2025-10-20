@@ -11,21 +11,57 @@ class PerformanceOptimizer {
         this.setupPerformanceMonitoring();
     }
 
-    // Lazy load images
+    // Enhanced lazy load images with blur-up effect
     setupLazyLoading() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
+        // Handle images with loading="lazy" attribute
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        
+                        // Add loaded class when image loads
+                        img.addEventListener('load', () => {
+                            img.classList.add('loaded');
+                        });
+                        
+                        // If already loaded
+                        if (img.complete) {
+                            img.classList.add('loaded');
+                        }
+                        
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
             });
-        });
 
-        images.forEach(img => imageObserver.observe(img));
+            lazyImages.forEach(img => imageObserver.observe(img));
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            lazyImages.forEach(img => img.classList.add('loaded'));
+        }
+        
+        // Handle images with data-src attribute
+        const dataSrcImages = document.querySelectorAll('img[data-src]');
+        if (dataSrcImages.length > 0) {
+            const dataSrcObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        img.classList.add('loaded');
+                        dataSrcObserver.unobserve(img);
+                    }
+                });
+            });
+            dataSrcImages.forEach(img => dataSrcObserver.observe(img));
+        }
     }
 
     // Preload critical resources

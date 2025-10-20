@@ -11,7 +11,7 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Sampurna Atmaramani - Senior Technical Architect & Full-Stack Developer with 20+ years of experience in React, Node.js, AWS, DevOps, AI/ML technologies. Expert in microservices, cloud architecture, and team leadership. View portfolio, projects, and AI applications.">
-    <meta name="keywords" content="Sampurna Atmaramani, Senior Architect, Full-Stack Developer, React, Node.js, AWS, DevOps, AI/ML, Hugging Face, Portfolio, Technical Architect, Pune, India, Microservices, Cloud Architecture, Team Leadership, AWS Certified Solutions Architect Professional">
+    <meta name="keywords" content="Sampurna Atmaramani, Sam, Monty, TechySam, Senior Architect, Full-Stack Developer, React, Node.js, AWS, DevOps, AI/ML, Hugging Face, Portfolio, Technical Architect, Pune, India, Microservices, Cloud Architecture, Team Leadership, AWS Certified Solutions Architect Professional">
     <meta name="author" content="Sampurna Atmaramani">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
@@ -21,9 +21,10 @@
     <meta name="rating" content="general">
     <meta name="theme-color" content="#2563eb">
     <meta name="msapplication-TileColor" content="#2563eb">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Sampurna Atmaramani Portfolio">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Sampurna Atmaramani Portfolio">
     <meta name="msapplication-config" content="none">
     <meta name="format-detection" content="telephone=no">
@@ -45,6 +46,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="en_GB">
     <meta property="og:locale:alternate" content="hi_IN">
+    <meta property="og:updated_time" content="2025-01-20T00:00:00Z">
+    <meta property="article:author" content="Sampurna Atmaramani">
+    <meta property="article:publisher" content="https://techysam.vercel.app">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -52,15 +56,47 @@
     <meta name="twitter:description" content="Sampurna Atmaramani - Senior Technical Architect & Full-Stack Developer with 20+ years of experience in React, Node.js, AWS, DevOps, and AI/ML technologies.">
     <meta name="twitter:image" content="https://techysam.vercel.app/profile-image.jpg">
     <meta name="twitter:image:alt" content="Sampurna Atmaramani - Senior Technical Architect & Full-Stack Developer">
-    <meta name="twitter:site" content="@techysam">
-    <meta name="twitter:creator" content="@techysam">
+    <meta name="twitter:site" content="@SampurnaAtmara1">
+    <meta name="twitter:creator" content="@SampurnaAtmara1">
+    <meta name="twitter:domain" content="techysam.vercel.app">
+    <meta name="twitter:url" content="https://techysam.vercel.app">
     
-    <!-- Favicon -->
+    <!-- Favicon & PWA Manifest -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Performance Optimization: DNS Prefetch & Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    
+    <!-- Resource Preload for Performance -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Critical CSS for Above-the-Fold Content -->
+    <style>
+        /* Critical CSS - Inline for Fastest Load */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1f2937; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+        .hero-title { font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 1rem; color: #1f2937; }
+        .btn-primary { background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 600; transition: all 0.3s; }
+        img[loading="lazy"] { opacity: 0; transition: opacity 0.3s; }
+        img[loading="lazy"].loaded { opacity: 1; }
+    </style>
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -68,7 +104,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Sampurna Atmaramani",
-        "alternateName": "Sampurna",
+        "alternateName": ["Sampurna", "Sam", "Monty", "TechySam"],
         "jobTitle": "Senior Technical Architect & Full-Stack Developer",
         "description": "Senior Technical Architect and Full-Stack Developer with 20+ years of hands-on experience in full life-cycle development projects, technical architecture, and team leadership.",
         "url": "https://techysam.vercel.app",
@@ -80,7 +116,13 @@
             "https://www.youtube.com/@techysam-bl9mk",
             "https://www.udemy.com/user/sampurna-atmaramani/",
             "https://www.npmjs.com/~s.atmaramani",
-            "https://huggingface.co/techysam"
+            "https://huggingface.co/techysam",
+            "https://x.com/SampurnaAtmara1",
+            "https://market.tutorialspoint.com/profile/sampurna-atmaramani",
+            "https://dev3318.d2yeycqtrs1v4f.amplifyapp.com/index.html",
+            "http://www.tutorial-center.com/sampurna-atmaramani.html",
+            "https://www.youtube.com/@monty9750/videos",
+            "https://www.quora.com/profile/Sam-Atmaramani"
         ],
         "worksFor": {
             "@type": "Organization",
@@ -106,7 +148,24 @@
             "Micro Frontend",
             "CI/CD",
             "Docker",
-            "Kubernetes"
+            "Kubernetes",
+            "Architecture Design",
+            "Architecture Implementation",
+            "Architecture Documentation",
+            "Architecture Review",
+            "Architecture Optimization",
+            "Architecture Refactoring",
+            "Architecture Migration",
+            "Architecture Performance Optimization",
+            "Architecture Security",
+            "Architecture Scalability",
+            "Architecture Maintainability",
+            "Architecture Performance",
+            "Architecture Security",
+            "Architecture Scalability",
+            "Architecture Maintainability",
+            "Architecture Performance",
+            "Architecture Security",
         ],
         "hasCredential": {
             "@type": "EducationalOccupationalCredential",
@@ -121,7 +180,7 @@
             "@type": "Organization",
             "name": "Cybage Software"
         },
-        "knowsLanguage": ["English", "Hindi", "Marathi"],
+        "knowsLanguage": ["English", "Hindi", "Marathi", "Sindhi"],
         "nationality": "Indian",
         "birthPlace": {
             "@type": "Place",
@@ -170,7 +229,307 @@
         "sameAs": [
             "https://www.linkedin.com/in/sampurna/",
             "https://github.com/satmaramani",
-            "https://medium.com/@s.atmaramani"
+            "https://medium.com/@s.atmaramani",
+            "https://www.youtube.com/@techysam-bl9mk",
+            "https://www.udemy.com/user/sampurna-atmaramani/",
+            "https://www.npmjs.com/~s.atmaramani",
+            "https://huggingface.co/techysam",
+            "https://x.com/SampurnaAtmara1",
+            "https://market.tutorialspoint.com/profile/sampurna-atmaramani",
+            "https://dev3318.d2yeycqtrs1v4f.amplifyapp.com/index.html",
+            "http://www.tutorial-center.com/sampurna-atmaramani.html",
+            "https://www.youtube.com/@monty9750/videos",
+            "https://www.quora.com/profile/Sam-Atmaramani"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://techysam.vercel.app/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About",
+                "item": "https://techysam.vercel.app/#about"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Experience",
+                "item": "https://techysam.vercel.app/#experience"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Skills",
+                "item": "https://techysam.vercel.app/#skills"
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "Projects",
+                "item": "https://techysam.vercel.app/#projects"
+            },
+            {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "AI Spaces",
+                "item": "https://techysam.vercel.app/#ai-spaces"
+            },
+            {
+                "@type": "ListItem",
+                "position": 7,
+                "name": "Contact",
+                "item": "https://techysam.vercel.app/#contact"
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+            "@type": "Person",
+            "@id": "https://techysam.vercel.app/#person",
+            "name": "Sampurna Atmaramani",
+            "alternateName": ["Sampurna", "Sam", "Monty", "TechySam"]
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Sampurna Atmaramani - Technical Consulting & Development",
+        "description": "Technical architecture consulting, full-stack development, cloud solutions, and AI/ML integration services",
+        "provider": {
+            "@type": "Person",
+            "name": "Sampurna Atmaramani"
+        },
+        "areaServed": {
+            "@type": "Place",
+            "name": "Pune, Maharashtra, India"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pune",
+            "addressRegion": "Maharashtra",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "18.5204",
+            "longitude": "73.8567"
+        },
+        "priceRange": "$$",
+        "telephone": "+91-9323895896",
+        "email": "s.atmaramani@gmail.com"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Featured Projects by Sampurna Atmaramani",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "SoftwareApplication",
+                    "name": "Coloring & Sketching Online Platform",
+                    "applicationCategory": "WebApplication",
+                    "description": "Interactive drawing platform with AI-powered features including background removal, image compression, and sentiment analysis",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Sampurna Atmaramani"
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "USD"
+                    }
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "SoftwareApplication",
+                    "name": "Inventory Management System",
+                    "applicationCategory": "BusinessApplication",
+                    "description": "End-to-end inventory management solution with replenishment, refunds, and multi-tenant architecture",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Sampurna Atmaramani"
+                    }
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "SoftwareApplication",
+                    "name": "Dynamic Website Creator",
+                    "applicationCategory": "MobileApplication",
+                    "description": "Android mobile app that creates subdomain websites in 2 minutes",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Sampurna Atmaramani"
+                    }
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Technical Courses by Sampurna Atmaramani",
+        "description": "Full-stack development and technical architecture courses",
+        "provider": {
+            "@type": "Organization",
+            "name": "Udemy",
+            "sameAs": "https://www.udemy.com/"
+        },
+        "instructor": {
+            "@type": "Person",
+            "name": "Sampurna Atmaramani",
+            "sameAs": "https://www.udemy.com/user/sampurna-atmaramani/"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.6",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Technical Tutorials and AI Demonstrations",
+        "description": "Technical tutorials, AI/ML demonstrations, and software development insights by Sampurna Atmaramani",
+        "uploadDate": "2024-01-01",
+        "contentUrl": "https://www.youtube.com/@techysam-bl9mk",
+        "thumbnailUrl": "https://techysam.vercel.app/profile-image.jpg",
+        "creator": {
+            "@type": "Person",
+            "name": "Sampurna Atmaramani"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How many years of experience does Sampurna Atmaramani have in software development?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I have 20+ years of hands-on experience in full-stack development, technical architecture, and team leadership across various technologies including React, Node.js, AWS, and AI/ML. My journey spans from PHP/LAMP stack development to modern cloud-native architectures and AI integration."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What certifications does Sampurna Atmaramani hold?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I am an AWS Certified Solutions Architect Professional (Credential ID: eba93c7b-b0c5-4891-8ece-38f45bda1cef), demonstrating expertise in cloud architecture, scalability, and AWS services. I also have extensive hands-on experience with Azure and other cloud platforms."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are Sampurna's main technical skills and expertise areas?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "My core expertise includes React.js, Node.js, TypeScript, Python, AWS (Solutions Architect Professional), DevOps, Microservices, Micro Frontend architecture, Docker, Kubernetes, CI/CD pipelines, and AI/ML technologies. I specialize in building scalable, cloud-native applications and leading technical teams."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Sampurna Atmaramani teach or create educational content?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! I'm a Udemy instructor with a 4.6/5 average rating, have written 200+ technical articles on Medium covering React, Node.js, AWS, DevOps, and AI/ML topics, and create tutorial videos on YouTube. I was also recognized as Top Trainer at Cybage Software in FY 2013-14, where I trained 100+ developers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What types of projects has Sampurna worked on?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I've built diverse projects including AI-powered drawing platforms with background removal and sentiment analysis, enterprise inventory management systems, dynamic website creators, clinic management applications, advocate case management systems, and multiple AI/ML applications on Hugging Face. My projects span web applications, mobile apps, and cloud-native solutions."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Where can I find Sampurna's AI/ML projects and open-source contributions?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "All my AI/ML projects are available on Hugging Face at https://huggingface.co/techysam with live demos for background removal, image style transfer, speech AI suite, sentiment analysis, and image enhancement. I've also published NPM packages at https://www.npmjs.com/~s.atmaramani."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Sampurna Atmaramani available for consulting or freelance projects?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, I'm open to technical consulting, architecture reviews, training sessions, code reviews, and interesting projects. I offer services in technical architecture consulting, full-stack development, cloud solutions (AWS/Azure), microservices architecture, team training, and AI/ML integration. Contact me at s.atmaramani@gmail.com or +91 9323895896."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Has Sampurna led technical teams before?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, I have extensive leadership experience, having led teams of 100+ engineers across multiple geographies at companies like Synechron, Infogain, and Honey Computing Services. I've mentored developers, established CI/CD pipelines, architected microservices systems, and been recognized as Top Trainer and Employee of the Month."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Where is Sampurna Atmaramani based and does he work remotely?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I'm based in Pune, Maharashtra, India, and work with clients globally, including US-based companies. I have extensive experience working remotely and collaborating with distributed teams across different time zones."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is Sampurna's approach to technical architecture and development?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I focus on scalable, maintainable solutions using microservices, cloud-native architectures, and modern best practices. I emphasize hands-on coding involvement rather than just theoretical architecture, ensuring practical implementations with Infrastructure as Code (CDK), automated testing (Playwright), and comprehensive CI/CD pipelines."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Sampurna work with AI/ML technologies?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, I actively work with AI/ML technologies, creating applications using Python, Transformers, Hugging Face, OpenCV, and various ML models. I've deployed 5+ AI spaces covering image processing, speech recognition, sentiment analysis, and have integrated AI features into production applications including background removal and audio sentiment analysis."
+                }
+            }
         ]
     }
     </script>
@@ -181,7 +540,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <div class="nav-profile-image">
-                    <img src="profile-image.jpg" alt="Sampurna Atmaramani - Senior Technical Architect" class="nav-photo">
+                    <img src="profile-image.jpg" alt="Sampurna Atmaramani - Senior Technical Architect" class="nav-photo" width="40" height="40" loading="eager">
                 </div>
                 <span>Sampurna Atmaramani</span>
             </div>
@@ -196,6 +555,7 @@
                 <li><a href="#awards">Awards</a></li>
                 <li><a href="#npm-packages">My NPM Packages</a></li>
                 <li><a href="#ai-spaces">My AI Spaces</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -247,7 +607,7 @@
             <div class="hero-image">
                 <div class="profile-card">
                     <div class="profile-avatar">
-                        <img src="profile-image.jpg" alt="Sampurna Atmaramani - Senior Technical Architect & Full-Stack Developer" class="profile-photo">
+                        <img src="profile-image.jpg" alt="Sampurna Atmaramani - Senior Technical Architect & Full-Stack Developer" class="profile-photo" width="300" height="300" loading="eager" fetchpriority="high">
                     </div>
                     <h3>Sampurna Atmaramani</h3>
                     <p>Senior Technical Architect & Full-Stack Developer</p>
@@ -877,6 +1237,136 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Common questions about Sampurna Atmaramani's experience, expertise, and services</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How many years of experience does Sampurna Atmaramani have in software development?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I have 20+ years of hands-on experience in full-stack development, technical architecture, and team leadership across various technologies including React, Node.js, AWS, and AI/ML. My journey spans from PHP/LAMP stack development to modern cloud-native architectures and AI integration.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What certifications does Sampurna Atmaramani hold?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I am an AWS Certified Solutions Architect Professional (Credential ID: eba93c7b-b0c5-4891-8ece-38f45bda1cef), demonstrating expertise in cloud architecture, scalability, and AWS services. I also have extensive hands-on experience with Azure and other cloud platforms.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What are Sampurna's main technical skills and expertise areas?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>My core expertise includes React.js, Node.js, TypeScript, Python, AWS (Solutions Architect Professional), DevOps, Microservices, Micro Frontend architecture, Docker, Kubernetes, CI/CD pipelines, and AI/ML technologies. I specialize in building scalable, cloud-native applications and leading technical teams.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Does Sampurna Atmaramani teach or create educational content?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! I'm a Udemy instructor with a 4.6/5 average rating, have written 200+ technical articles on Medium covering React, Node.js, AWS, DevOps, and AI/ML topics, and create tutorial videos on YouTube. I was also recognized as Top Trainer at Cybage Software in FY 2013-14, where I trained 100+ developers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What types of projects has Sampurna worked on?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I've built diverse projects including AI-powered drawing platforms with background removal and sentiment analysis, enterprise inventory management systems, dynamic website creators, clinic management applications, advocate case management systems, and multiple AI/ML applications on Hugging Face. My projects span web applications, mobile apps, and cloud-native solutions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Where can I find Sampurna's AI/ML projects and open-source contributions?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All my AI/ML projects are available on Hugging Face at <a href="https://huggingface.co/techysam" target="_blank">huggingface.co/techysam</a> with live demos for background removal, image style transfer, speech AI suite, sentiment analysis, and image enhancement. I've also published NPM packages at <a href="https://www.npmjs.com/~s.atmaramani" target="_blank">npmjs.com/~s.atmaramani</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Is Sampurna Atmaramani available for consulting or freelance projects?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, I'm open to technical consulting, architecture reviews, training sessions, code reviews, and interesting projects. I offer services in technical architecture consulting, full-stack development, cloud solutions (AWS/Azure), microservices architecture, team training, and AI/ML integration. Contact me at <a href="mailto:s.atmaramani@gmail.com">s.atmaramani@gmail.com</a> or +91 9323895896.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Has Sampurna led technical teams before?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, I have extensive leadership experience, having led teams of 100+ engineers across multiple geographies at companies like Synechron, Infogain, and Honey Computing Services. I've mentored developers, established CI/CD pipelines, architected microservices systems, and been recognized as Top Trainer and Employee of the Month.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Where is Sampurna Atmaramani based and does he work remotely?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I'm based in Pune, Maharashtra, India, and work with clients globally, including US-based companies. I have extensive experience working remotely and collaborating with distributed teams across different time zones.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What is Sampurna's approach to technical architecture and development?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I focus on scalable, maintainable solutions using microservices, cloud-native architectures, and modern best practices. I emphasize hands-on coding involvement rather than just theoretical architecture, ensuring practical implementations with Infrastructure as Code (CDK), automated testing (Playwright), and comprehensive CI/CD pipelines.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What awards and recognition has Sampurna received?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I've received the Star Performance Award from Synechron Technologies (April 2024), Employee of the Month from Infogain (January 2023), Top Trainer recognition at Cybage Software (FY 2013-14), and maintain a 4.6/5 rating as a Udemy instructor. I've also won sports competitions including badminton tournaments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Does Sampurna work with AI/ML technologies?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, I actively work with AI/ML technologies, creating applications using Python, Transformers, Hugging Face, OpenCV, and various ML models. I've deployed 5+ AI spaces covering image processing, speech recognition, sentiment analysis, and have integrated AI features into production applications including background removal and audio sentiment analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -982,7 +1472,7 @@
             <div class="awards-grid">
                 <div class="award-item">
                                             <div class="award-image">
-                            <img src="images/award-1.jpg" alt="Sampurna Atmaramani - Star Performance Award at Synechron Technologies" class="award-photo">
+                            <img src="images/award-1.jpg" alt="Sampurna Atmaramani - Star Performance Award at Synechron Technologies" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                         </div>
                         <div class="award-info">
                             <h3>Star Performance Award</h3>
@@ -992,7 +1482,7 @@
                 
                 <div class="award-item">
                                             <div class="award-image">
-                            <img src="images/award-2.jpg" alt="Sampurna Atmaramani - Employee of the Month at Infogain" class="award-photo">
+                            <img src="images/award-2.jpg" alt="Sampurna Atmaramani - Employee of the Month at Infogain" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                         </div>
                         <div class="award-info">
                             <h3>Employee of the Month</h3>
@@ -1002,7 +1492,7 @@
                 
                                 <div class="award-item">
                     <div class="award-image">
-                        <img src="images/singing-stage.jpg" alt="Sampurna Atmaramani - Singing Performance on Stage" class="award-photo">
+                        <img src="images/singing-stage.jpg" alt="Sampurna Atmaramani - Singing Performance on Stage" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                     <div class="award-info">
                         <h3>Stage Performance</h3>
@@ -1015,7 +1505,7 @@
                 
                 <div class="award-item">
                     <div class="award-image">
-                        <img src="images/flute-performance.jpg" alt="Sampurna Atmaramani - Flute Performance" class="award-photo">
+                        <img src="images/flute-performance.jpg" alt="Sampurna Atmaramani - Flute Performance" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                     <div class="award-info">
                         <h3>Flute Performance</h3>
@@ -1028,7 +1518,7 @@
                 
                 <div class="award-item">
                     <div class="award-image">
-                        <img src="images/training-award.jpg" alt="Sampurna Atmaramani - Badminton Winner Award" class="award-photo">
+                        <img src="images/training-award.jpg" alt="Sampurna Atmaramani - Badminton Winner Award" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                     <div class="award-info">
                         <h3>Badminton Winner</h3>
@@ -1038,7 +1528,7 @@
                 
                 <div class="award-item">
                     <div class="award-image">
-                        <img src="images/udemy-instructor.jpg" alt="Sampurna Atmaramani - Udemy Instructor Achievement" class="award-photo">
+                        <img src="images/udemy-instructor.jpg" alt="Sampurna Atmaramani - Udemy Instructor Achievement" class="award-photo" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                     <div class="award-info">
                         <h3>Udemy Instructor</h3>
@@ -1097,7 +1587,7 @@
         </div>
     </footer>
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics (Deferred) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XPZHRS05K"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -1106,6 +1596,21 @@
         gtag('config', 'G-7XPZHRS05K');
     </script>
     
-    <script src="script.js"></script>
+    <!-- Main Script with Defer for Better Performance -->
+    <script src="script.js" defer></script>
+    
+    <!-- Performance Optimizer Script -->
+    <script src="performance-optimizer.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered:', reg.scope))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>
