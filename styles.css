@@ -1297,14 +1297,42 @@ section {
 
 .social-links h4 {
     font-size: 1.2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #1f2937;
+}
+
+.social-subtitle {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.75rem;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.social-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.social-grid::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.social-grid::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.social-grid::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }
 
 .social-link {
@@ -1319,11 +1347,20 @@ section {
     transition: all 0.3s ease;
 }
 
-.social-link.linkedin { background: #0077b5; }
-.social-link.github { background: #333; }
-.social-link.medium { background: #00ab6c; }
-.social-link.youtube { background: #ff0000; }
-.social-link.udemy { background: #ec5252; }
+/* Social Platform Colors */
+.social-link.linkedin { background: linear-gradient(135deg, #0077b5, #005582); }
+.social-link.github { background: linear-gradient(135deg, #333, #24292e); }
+.social-link.twitter { background: linear-gradient(135deg, #1da1f2, #0c85d0); }
+.social-link.medium { background: linear-gradient(135deg, #00ab6c, #008556); }
+.social-link.youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+.social-link.youtube-alt { background: linear-gradient(135deg, #c4302b, #9c2421); }
+.social-link.udemy { background: linear-gradient(135deg, #ec5252, #c92a2a); }
+.social-link.tutorialspoint { background: linear-gradient(135deg, #5cb85c, #449d44); }
+.social-link.tutorial-center { background: linear-gradient(135deg, #17a2b8, #117a8b); }
+.social-link.npm { background: linear-gradient(135deg, #cb3837, #a02a2a); }
+.social-link.huggingface { background: linear-gradient(135deg, #ff9d00, #e67e00); }
+.social-link.quora { background: linear-gradient(135deg, #b92b27, #8b1f1c); }
+.social-link.portfolio-alt { background: linear-gradient(135deg, #6366f1, #4f46e5); }
 
 .social-link:hover {
     transform: translateY(-2px);
