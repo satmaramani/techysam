@@ -84,26 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Mobile Navigation Toggle - Optimized
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        navMenu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    }
-});
+// Mobile Navigation Toggle - Now inline in HTML for faster execution
+// See inline script in index.html
 
 // Smooth scrolling for navigation links - Optimized with event delegation
 document.addEventListener('click', (e) => {
@@ -120,45 +102,24 @@ document.addEventListener('click', (e) => {
     }
 }, { passive: false }); // Not passive because we preventDefault
 
-// Navbar background change on scroll - Throttled for performance
-let navbarScrollTimeout;
+// Navbar scroll effect - Lightweight with passive listener
+let ticking = false;
 window.addEventListener('scroll', () => {
-    if (!navbarScrollTimeout) {
-        navbarScrollTimeout = setTimeout(() => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
             const navbar = document.querySelector('.navbar');
             if (navbar) {
-                if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                navbar.classList.toggle('scrolled', window.scrollY > 100);
             }
-            navbarScrollTimeout = null;
-        }, 100);
+            ticking = false;
+        });
+        ticking = true;
     }
 }, { passive: true });
 
-// Intersection Observer for animations - Lightweight
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
-            sectionObserver.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe sections - but only after initial render
-setTimeout(() => {
-    document.querySelectorAll('section').forEach(section => {
-        sectionObserver.observe(section);
-    });
-}, 100);
+// Section animations DISABLED for performance
+// Sections display immediately without animation
+// Massive improvement to FCP, LCP, TBT
 
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
@@ -318,52 +279,9 @@ function typeWriter(element, text, speed = 100) {
 // Hero title is visible by default (no animation needed for performance)
 // Removed to reduce TBT
 
-// Counter animation for stats - Lightweight and fast
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent.replace(/\D/g, ''));
-        const hasPlus = counter.textContent.includes('+');
-        const duration = 800; // Fixed duration
-        const startTime = performance.now();
-        
-        const updateCounter = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const current = Math.floor(progress * target);
-            
-            counter.textContent = current + (hasPlus ? '+' : '');
-            
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target + (hasPlus ? '+' : '');
-            }
-        };
-        
-        requestAnimationFrame(updateCounter);
-    });
-}
-
-// Trigger counter animation when stats section is visible
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Defer the animation slightly to not block initial render
-            setTimeout(() => animateCounters(), 50);
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-
-// Setup observer after initial render
-setTimeout(() => {
-    const statsSection = document.querySelector('.hero-stats');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
-    }
-}, 200);
+// Counter animation DISABLED for performance
+// Numbers display immediately - no animation
+// This significantly improves TBT and FCP
 
 // Skill tags and project cards hover - Use CSS only for better performance
 // Removed JavaScript hover effects - now handled by CSS
@@ -391,80 +309,37 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 */
 
-// Active navigation highlighting - Throttled for performance
-function updateActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Throttle active nav updates
-let activeNavTimeout;
-window.addEventListener('scroll', () => {
-    if (!activeNavTimeout) {
-        activeNavTimeout = setTimeout(() => {
-            updateActiveNav();
-            activeNavTimeout = null;
-        }, 150);
-    }
-}, { passive: true });
-
-// Add active state styles
-const style = document.createElement('style');
-style.textContent = `
-    .nav-menu a.active {
-        color: #2563eb !important;
-    }
-    .nav-menu a.active::after {
-        width: 100% !important;
-    }
-`;
-document.head.appendChild(style);
+// Navigation and animations DISABLED for maximum performance
+// All styling handled by CSS for instant rendering
 
 // Minimal initialization - Keep TBT low
 // Sections animate via CSS automatically
 // No heavy operations on page load
 
-// Smooth scroll to top functionality - Created after page load
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const scrollToTopBtn = document.createElement('button');
-        scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-        scrollToTopBtn.className = 'scroll-to-top';
-        scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
-        
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        document.body.appendChild(scrollToTopBtn);
-        
-        // Show/hide - Throttled
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (!scrollTimeout) {
-                scrollTimeout = setTimeout(() => {
-                    scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
-                    scrollTimeout = null;
-                }, 150);
-            }
-        }, { passive: true });
-    }, 500);
-});
+// Scroll to top button - Deferred way after load
+setTimeout(() => {
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+    
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.body.appendChild(scrollToTopBtn);
+    
+    // Show/hide - Throttled
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+                scrollTimeout = null;
+            }, 200);
+        }
+    }, { passive: true });
+}, 3000); // Wait 3 seconds before creating button
 
 // FAQ Accordion Functionality
 document.addEventListener('DOMContentLoaded', () => {

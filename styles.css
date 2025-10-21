@@ -135,7 +135,8 @@ img {
     position: relative;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active {
     color: #2563eb;
 }
 

@@ -1658,19 +1658,39 @@
         gtag('config', 'G-7XPZHRS05K');
     </script>
     
-    <!-- Main Script - Load normally for critical functionality -->
-    <script src="script.js"></script>
+    <!-- Minimal inline script for critical functionality -->
+    <script>
+        // Mobile nav toggle - inline for instant functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.onclick = () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                };
+                navMenu.onclick = (e) => {
+                    if (e.target.tagName === 'A') {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                };
+            }
+        });
+    </script>
     
-    <!-- Performance Optimizer Script - Can be deferred -->
-    <script src="performance-optimizer.js" defer></script>
+    <!-- Ultra-minimal script for maximum performance -->
+    <script src="script-minimal.js" defer></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration - deferred -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(reg => console.log('Service Worker registered:', reg.scope))
-                    .catch(err => console.log('Service Worker registration failed:', err));
+                setTimeout(() => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(reg => console.log('SW registered'))
+                        .catch(err => console.log('SW failed:', err));
+                }, 2000);
             });
         }
     </script>
