@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebP Test - What's Actually Loading?</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-box { border: 2px solid #333; padding: 20px; margin: 20px 0; }
+        img { max-width: 200px; border: 1px solid #ccc; }
+        .info { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>WebP vs JPG Loading Test</h1>
+    
+    <div class="test-box">
+        <h2>Test 1: Picture Tag (What you have in your site)</h2>
+        <p>This should load WebP if supported, JPG if not:</p>
+        <picture>
+            <source srcset="images/award-2.webp" type="image/webp">
+            <img src="images/award-2.jpg" alt="Award 2" id="test1">
+        </picture>
+        <div class="info">
+            <strong>Check Network tab:</strong> Look for either award-2.webp OR award-2.jpg
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 2: Direct WebP (Should work in modern browsers)</h2>
+        <img src="images/award-2.webp" alt="Award 2 WebP" id="test2">
+        <div class="info">
+            <strong>If this shows:</strong> Your browser supports WebP
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 3: Direct JPG (Should always work)</h2>
+        <img src="images/award-2.jpg" alt="Award 2 JPG" id="test3">
+        <div class="info">
+            <strong>This should always show:</strong> JPG fallback
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Browser Detection</h2>
+        <p id="webp-support">Checking WebP support...</p>
+        <p id="loaded-image">Checking which image loaded...</p>
+    </div>
+    
+    <script>
+        // Check WebP support
+        function checkWebP() {
+            const webP = new Image();
+            webP.onload = webP.onerror = function() {
+                const isSupported = webP.height === 2;
+                document.getElementById('webp-support').innerHTML = 
+                    isSupported ? '✅ WebP is SUPPORTED' : '❌ WebP is NOT supported';
+            };
+            webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+        }
+        
+        // Check which image actually loaded
+        function checkLoadedImage() {
+            const test1 = document.getElementById('test1');
+            test1.onload = function() {
+                const src = this.src;
+                const isWebP = src.includes('.webp');
+                document.getElementById('loaded-image').innerHTML = 
+                    `✅ Picture tag loaded: ${isWebP ? 'WEBP' : 'JPG'} (${src})`;
+            };
+        }
+        
+        checkWebP();
+        checkLoadedImage();
+    </script>
+</body>
+</html>

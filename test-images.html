@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        img { max-width: 200px; height: auto; margin: 10px; border: 1px solid #ddd; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+    
+    <div class="test-section">
+        <h2>Profile Images</h2>
+        <h3>Small Profile (Navbar)</h3>
+        <picture>
+            <source srcset="profile-image-small.webp" type="image/webp">
+            <img src="profile-image.jpg" alt="Profile Small" onload="this.nextElementSibling.innerHTML='✅ WebP loaded'">
+            <span class="error">❌ Loading...</span>
+        </picture>
+        
+        <h3>Large Profile (Hero)</h3>
+        <picture>
+            <source srcset="profile-image.webp" type="image/webp">
+            <img src="profile-image.jpg" alt="Profile Large" onload="this.nextElementSibling.innerHTML='✅ WebP loaded'">
+            <span class="error">❌ Loading...</span>
+        </picture>
+    </div>
+    
+    <div class="test-section">
+        <h2>Award Images</h2>
+        <h3>Award 1</h3>
+        <picture>
+            <source srcset="images/award-1.webp" type="image/webp">
+            <img src="images/award-1.jpg" alt="Award 1" onload="this.nextElementSibling.innerHTML='✅ WebP loaded'">
+            <span class="error">❌ Loading...</span>
+        </picture>
+        
+        <h3>Award 2</h3>
+        <picture>
+            <source srcset="images/award-2.webp" type="image/webp">
+            <img src="images/award-2.jpg" alt="Award 2" onload="this.nextElementSibling.innerHTML='✅ WebP loaded'">
+            <span class="error">❌ Loading...</span>
+        </picture>
+        
+        <h3>Singing Stage</h3>
+        <picture>
+            <source srcset="images/singing-stage.webp" type="image/webp">
+            <img src="images/singing-stage.jpg" alt="Singing Stage" onload="this.nextElementSibling.innerHTML='✅ WebP loaded'">
+            <span class="error">❌ Loading...</span>
+        </picture>
+    </div>
+    
+    <div class="test-section">
+        <h2>Direct Image Tests (No Picture Tag)</h2>
+        <h3>JPG Fallback</h3>
+        <img src="images/award-1.jpg" alt="Award 1 JPG" onload="this.nextElementSibling.innerHTML='✅ JPG loaded'">
+        <span class="error">❌ Loading...</span>
+        
+        <h3>WebP Direct</h3>
+        <img src="images/award-1.webp" alt="Award 1 WebP" onload="this.nextElementSibling.innerHTML='✅ WebP loaded directly'">
+        <span class="error">❌ Loading...</span>
+    </div>
+    
+    <script>
+        // Check if WebP is supported
+        function checkWebPSupport() {
+            const webP = new Image();
+            webP.onload = webP.onerror = function() {
+                const isSupported = webP.height === 2;
+                document.getElementById('webp-support').innerHTML = isSupported ? 
+                    '✅ WebP is supported by this browser' : 
+                    '❌ WebP is NOT supported - will use JPG fallback';
+            };
+            webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+        }
+        
+        checkWebPSupport();
+    </script>
+    
+    <div class="test-section">
+        <h2>Browser Support</h2>
+        <p id="webp-support">Checking WebP support...</p>
+    </div>
+</body>
+</html>

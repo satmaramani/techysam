@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple WebP Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        img { max-width: 200px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>WebP Test</h1>
+    
+    <div class="test">
+        <h2>Test 1: Direct WebP</h2>
+        <img src="images/award-1.webp" alt="Direct WebP" onload="console.log('✅ WebP loaded directly')" onerror="console.log('❌ WebP failed')">
+    </div>
+    
+    <div class="test">
+        <h2>Test 2: Direct JPG</h2>
+        <img src="images/award-1.jpg" alt="Direct JPG" onload="console.log('✅ JPG loaded directly')" onerror="console.log('❌ JPG failed')">
+    </div>
+    
+    <div class="test">
+        <h2>Test 3: Picture Tag</h2>
+        <picture>
+            <source srcset="images/award-1.webp" type="image/webp">
+            <img src="images/award-1.jpg" alt="Picture Tag" onload="console.log('✅ Picture tag loaded:', this.src)" onerror="console.log('❌ Picture tag failed')">
+        </picture>
+    </div>
+    
+    <div class="test">
+        <h2>Test 4: Picture Tag with Different WebP</h2>
+        <picture>
+            <source srcset="images/award-2.webp" type="image/webp">
+            <img src="images/award-2.jpg" alt="Picture Tag 2" onload="console.log('✅ Picture tag 2 loaded:', this.src)" onerror="console.log('❌ Picture tag 2 failed')">
+        </picture>
+    </div>
+    
+    <script>
+        console.log('Browser WebP support check...');
+        const webP = new Image();
+        webP.onload = webP.onerror = function() {
+            const isSupported = webP.height === 2;
+            console.log('WebP support:', isSupported ? 'YES' : 'NO');
+        };
+        webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    </script>
+</body>
+</html>

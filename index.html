@@ -116,8 +116,22 @@
         .hero-title { font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
         .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 1rem; color: #1f2937; }
         .btn-primary { background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 600; transition: all 0.3s; }
-        img[loading="lazy"] { opacity: 0; transition: opacity 0.3s; }
-        img[loading="lazy"].loaded { opacity: 1; }
+        /* Award images should now be visible */
+        
+        /* DEBUG: Add debugging styles */
+        .award-photo {
+            border: 2px solid red !important;
+            background: yellow !important;
+            min-height: 100px !important;
+        }
+        
+        .award-photo[src*="webp"] {
+            border-color: green !important;
+        }
+        
+        .award-photo[src*="jpg"] {
+            border-color: blue !important;
+        }
     </style>
     
     <!-- Structured Data for SEO -->
@@ -1536,10 +1550,10 @@
             <div class="awards-grid">
                 <div class="award-item">
                                             <div class="award-image">
-                            <picture>
-                                <source srcset="images/award-1.webp" type="image/webp">
-                                <img src="images/award-1.jpg" alt="Sampurna Atmaramani - Star Performance Award at Synechron Technologies" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
-                            </picture>
+                        <picture>
+                            <source srcset="images/award-1.webp" type="image/webp">
+                            <img src="images/award-1.jpg" alt="Sampurna Atmaramani - Star Performance Award at Synechron Technologies" class="award-photo" width="400" height="300" loading="eager" decoding="async">
+                        </picture>
                         </div>
                         <div class="award-info">
                             <h3>Star Performance Award</h3>
@@ -1549,10 +1563,10 @@
                 
                 <div class="award-item">
                                             <div class="award-image">
-                            <picture>
-                                <source srcset="images/award-2.webp" type="image/webp">
-                                <img src="images/award-2.jpg" alt="Sampurna Atmaramani - Employee of the Month at Infogain" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
-                            </picture>
+                        <picture>
+                            <source srcset="images/award-2.webp" type="image/webp">
+                            <img src="images/award-2.jpg" alt="Sampurna Atmaramani - Employee of the Month at Infogain" class="award-photo" width="400" height="300" loading="eager" decoding="async">
+                        </picture>
                         </div>
                         <div class="award-info">
                             <h3>Employee of the Month</h3>
@@ -1564,7 +1578,7 @@
                     <div class="award-image">
                         <picture>
                             <source srcset="images/singing-stage.webp" type="image/webp">
-                            <img src="images/singing-stage.jpg" alt="Sampurna Atmaramani - Singing Performance on Stage" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
+                            <img src="images/singing-stage.jpg" alt="Sampurna Atmaramani - Singing Performance on Stage" class="award-photo" width="400" height="300" loading="eager" decoding="async">
                         </picture>
                     </div>
                     <div class="award-info">
@@ -1580,7 +1594,7 @@
                     <div class="award-image">
                         <picture>
                             <source srcset="images/flute-performance.webp" type="image/webp">
-                            <img src="images/flute-performance.jpg" alt="Sampurna Atmaramani - Flute Performance" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
+                            <img src="images/flute-performance.jpg" alt="Sampurna Atmaramani - Flute Performance" class="award-photo" width="400" height="300" loading="eager" decoding="async">
                         </picture>
                     </div>
                     <div class="award-info">
@@ -1596,7 +1610,7 @@
                     <div class="award-image">
                         <picture>
                             <source srcset="images/training-award.webp" type="image/webp">
-                            <img src="images/training-award.jpg" alt="Sampurna Atmaramani - Badminton Winner Award" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
+                            <img src="images/training-award.jpg" alt="Sampurna Atmaramani - Badminton Winner Award" class="award-photo" width="400" height="300" loading="eager" decoding="async">
                         </picture>
                     </div>
                     <div class="award-info">
@@ -1609,7 +1623,7 @@
                     <div class="award-image">
                         <picture>
                             <source srcset="images/udemy-instructor.webp" type="image/webp">
-                            <img src="images/udemy-instructor.jpg" alt="Sampurna Atmaramani - Udemy Instructor Achievement" class="award-photo" width="700" height="400" loading="lazy" decoding="async">
+                            <img src="images/udemy-instructor.jpg" alt="Sampurna Atmaramani - Udemy Instructor Achievement" class="award-photo" width="400" height="300" loading="eager" decoding="async">
                         </picture>
                     </div>
                     <div class="award-info">

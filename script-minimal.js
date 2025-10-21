@@ -47,7 +47,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 4. Contact form
+// 4. Debug award images loading
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🔍 DOM loaded, checking award images...');
+    const awardImages = document.querySelectorAll('.award-photo');
+    console.log(`Found ${awardImages.length} award images`);
+    
+    awardImages.forEach((img, index) => {
+        console.log(`Award Image ${index + 1}:`, {
+            src: img.src,
+            complete: img.complete,
+            naturalWidth: img.naturalWidth,
+            naturalHeight: img.naturalHeight,
+            offsetWidth: img.offsetWidth,
+            offsetHeight: img.offsetHeight
+        });
+        
+        img.addEventListener('load', () => {
+            console.log(`✅ Award Image ${index + 1} loaded successfully:`, img.src);
+            console.log('Final dimensions:', img.naturalWidth, 'x', img.naturalHeight);
+        });
+        
+        img.addEventListener('error', (e) => {
+            console.log(`❌ Award Image ${index + 1} failed to load:`, img.src);
+            console.log('Error details:', e);
+        });
+        
+        // Check if image is already loaded
+        if (img.complete && img.naturalWidth > 0) {
+            console.log(`✅ Award Image ${index + 1} already loaded:`, img.src);
+        } else {
+            console.log(`⏳ Award Image ${index + 1} still loading:`, img.src);
+        }
+    });
+});
+
+// 5. Contact form
 const form = document.getElementById('contactForm');
 if (form) {
     form.onsubmit = (e) => {
