@@ -115,36 +115,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background change on scroll
+// Navbar background change on scroll - Throttled for performance
+let navbarScrollTimeout;
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+    if (!navbarScrollTimeout) {
+        navbarScrollTimeout = setTimeout(() => {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            navbarScrollTimeout = null;
+        }, 100);
     }
-});
+}, { passive: true });
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
-        }
+// Intersection Observer for animations - Deferred for TBT
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        setupIntersectionObservers();
     });
-}, observerOptions);
+} else {
+    setTimeout(setupIntersectionObservers, 1500);
+}
 
-// Observe all sections for animation
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
+function setupIntersectionObservers() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target); // Stop observing once animated
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections for animation
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+}
 
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
@@ -281,7 +298,10 @@ function showNotification(message, type = 'info') {
     });
 }
 
-// Typing effect for hero title with continuous loop
+// Typing effect for hero title - DISABLED for performance
+// This effect was causing high TBT (Total Blocking Time)
+// Uncomment if needed, but it impacts mobile performance
+/*
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
@@ -291,54 +311,48 @@ function typeWriter(element, text, speed = 100) {
             element.innerHTML += text.charAt(i);
             i++;
             setTimeout(type, speed);
-        } else {
-            // Wait for 2 seconds after typing is complete, then start erasing
-            setTimeout(erase, 2000);
-        }
-    }
-    
-    function erase() {
-        if (element.innerHTML.length > 0) {
-            element.innerHTML = element.innerHTML.slice(0, -1);
-            setTimeout(erase, speed / 2); // Erase faster than typing
-        } else {
-            // Wait for 1 second after erasing is complete, then start typing again
-            setTimeout(() => typeWriter(element, text, speed), 1000);
         }
     }
     
     type();
 }
+*/
 
-// Initialize typing effect when page loads
+// Keep hero title static for better performance
 window.addEventListener('load', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const originalText = heroTitle.innerHTML;
-        typeWriter(heroTitle, originalText, 50);
+        // Title stays as-is, no animation for better TBT
+        heroTitle.style.opacity = '1';
     }
 });
 
-// Counter animation for stats
+// Counter animation for stats - Optimized with requestIdleCallback
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
     
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/\D/g, ''));
-        const increment = target / 100;
+        const hasPlus = counter.textContent.includes('+');
         let current = 0;
+        const increment = Math.ceil(target / 50); // Faster animation
         
         const updateCounter = () => {
             if (current < target) {
-                current += increment;
-                counter.textContent = Math.ceil(current) + (counter.textContent.includes('+') ? '+' : '');
+                current = Math.min(current + increment, target);
+                counter.textContent = current + (hasPlus ? '+' : '');
                 requestAnimationFrame(updateCounter);
             } else {
-                counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
+                counter.textContent = target + (hasPlus ? '+' : '');
             }
         };
         
-        updateCounter();
+        // Use requestIdleCallback for non-critical animation
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => updateCounter());
+        } else {
+            setTimeout(updateCounter, 100);
+        }
     });
 }
 
@@ -352,69 +366,50 @@ const statsObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 
-const statsSection = document.querySelector('.hero-stats');
-if (statsSection) {
-    statsObserver.observe(statsSection);
-}
-
-// Skill tags hover effect
-document.addEventListener('DOMContentLoaded', () => {
-    const skillTags = document.querySelectorAll('.skill-tag');
-    
-    skillTags.forEach(tag => {
-        tag.addEventListener('mouseenter', () => {
-            tag.style.transform = 'translateY(-2px) scale(1.05)';
-        });
-        
-        tag.addEventListener('mouseleave', () => {
-            tag.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-});
-
-// Project cards hover effect
-document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-card, .space-card');
-    
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-8px)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-        });
-    });
-});
-
-// Smooth reveal animation for timeline items
-const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateX(0)';
+// Defer observer setup
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        const statsSection = document.querySelector('.hero-stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
         }
     });
-}, { threshold: 0.3 });
+} else {
+    setTimeout(() => {
+        const statsSection = document.querySelector('.hero-stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    }, 1000);
+}
 
-document.querySelectorAll('.timeline-item').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateX(-50px)';
-    item.style.transition = 'all 0.6s ease-out';
-    timelineObserver.observe(item);
-});
+// Skill tags and project cards hover - Use CSS only for better performance
+// Removed JavaScript hover effects - now handled by CSS
+// This significantly reduces TBT
 
-// Parallax effect for hero section
+// Smooth reveal animation for timeline items - Moved to CSS for TBT optimization
+// CSS handles this more efficiently without blocking main thread
+
+// Parallax effect for hero section - DISABLED for TBT optimization
+// This creates unnecessary main thread work during scroll
+// Uncomment only if needed for visual effect
+/*
+let parallaxTimeout;
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
+    if (!parallaxTimeout) {
+        parallaxTimeout = requestAnimationFrame(() => {
+            const hero = document.querySelector('.hero');
+            if (hero && window.pageYOffset < window.innerHeight) {
+                const rate = window.pageYOffset * -0.3;
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+            parallaxTimeout = null;
+        });
     }
-});
+}, { passive: true });
+*/
 
-// Active navigation highlighting
+// Active navigation highlighting - Throttled for performance
 function updateActiveNav() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-menu a');
@@ -422,7 +417,6 @@ function updateActiveNav() {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (window.pageYOffset >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
@@ -436,7 +430,16 @@ function updateActiveNav() {
     });
 }
 
-window.addEventListener('scroll', updateActiveNav);
+// Throttle active nav updates
+let activeNavTimeout;
+window.addEventListener('scroll', () => {
+    if (!activeNavTimeout) {
+        activeNavTimeout = setTimeout(() => {
+            updateActiveNav();
+            activeNavTimeout = null;
+        }, 150);
+    }
+}, { passive: true });
 
 // Add active state styles
 const style = document.createElement('style');
@@ -450,140 +453,66 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize everything when DOM is loaded
+// Initialize everything when DOM is loaded - OPTIMIZED for TBT
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        // Add fade-in animation to all sections
-        document.querySelectorAll('section').forEach((section, index) => {
-            try {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                section.style.transition = 'all 0.6s ease-out';
-                
-                setTimeout(() => {
-                    try {
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    } catch (error) {
-                        console.error('Error in section animation:', error);
-                    }
-                }, index * 200);
-            } catch (error) {
-                console.error('Error setting up section animation:', error);
-            }
+    // Defer non-critical animations using requestIdleCallback
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            initNonCriticalAnimations();
         });
-        
-        // Add loading animation
-        try {
-            const loader = document.createElement('div');
-            loader.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 9999;
-                    transition: opacity 0.5s ease-out;
-                ">
-                    <div style="
-                        width: 50px;
-                        height: 50px;
-                        border: 3px solid rgba(255,255,255,0.3);
-                        border-top: 3px solid white;
-                        border-radius: 50%;
-                        animation: spin 1s linear infinite;
-                    "></div>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            `;
-            
-            document.body.appendChild(loader);
-            
-            // Remove loader after page loads
-            setTimeout(() => {
-                try {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        if (loader.parentNode) {
-                            loader.remove();
-                        }
-                    }, 500);
-                } catch (error) {
-                    console.error('Error removing loader:', error);
-                }
-            }, 1000);
-        } catch (error) {
-            console.error('Error creating loader:', error);
-        }
-    } catch (error) {
-        console.error('Error during initialization:', error);
-    }
-});
-
-// Smooth scroll to top functionality
-const scrollToTopBtn = document.createElement('button');
-scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-scrollToTopBtn.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-`;
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-scrollToTopBtn.addEventListener('mouseenter', () => {
-    scrollToTopBtn.style.transform = 'translateY(-5px)';
-    scrollToTopBtn.style.boxShadow = '0 8px 25px rgba(37, 99, 235, 0.4)';
-});
-
-scrollToTopBtn.addEventListener('mouseleave', () => {
-    scrollToTopBtn.style.transform = 'translateY(0)';
-    scrollToTopBtn.style.boxShadow = '0 4px 20px rgba(37, 99, 235, 0.3)';
-});
-
-document.body.appendChild(scrollToTopBtn);
-
-// Show/hide scroll to top button
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.opacity = '1';
-        scrollToTopBtn.style.visibility = 'visible';
-        scrollToTopBtn.style.transform = 'translateY(0)';
     } else {
-        scrollToTopBtn.style.opacity = '0';
-        scrollToTopBtn.style.visibility = 'hidden';
-        scrollToTopBtn.style.transform = 'translateY(20px)';
+        setTimeout(initNonCriticalAnimations, 2000);
     }
 });
+
+function initNonCriticalAnimations() {
+    try {
+        // Simplified section animations - use CSS instead
+        document.querySelectorAll('section').forEach((section) => {
+            section.classList.add('section-visible');
+        });
+    } catch (error) {
+        console.error('Error in animations:', error);
+    }
+}
+
+// Smooth scroll to top functionality - Deferred for performance
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => createScrollToTopButton());
+} else {
+    setTimeout(createScrollToTopButton, 2000);
+}
+
+function createScrollToTopButton() {
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+    
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    document.body.appendChild(scrollToTopBtn);
+    
+    // Show/hide scroll to top button - Throttled
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+                scrollTimeout = null;
+            }, 100);
+        }
+    }, { passive: true });
+}
 
 // FAQ Accordion Functionality
 document.addEventListener('DOMContentLoaded', () => {
