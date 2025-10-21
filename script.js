@@ -84,36 +84,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// Mobile Navigation Toggle - Optimized
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+// Smooth scrolling for navigation links - Optimized with event delegation
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (link) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(link.getAttribute('href'));
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
         }
-    });
-});
+    }
+}, { passive: false }); // Not passive because we preventDefault
 
 // Navbar background change on scroll - Throttled for performance
 let navbarScrollTimeout;
@@ -133,35 +138,27 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// Intersection Observer for animations - Deferred for TBT
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-        setupIntersectionObservers();
+// Intersection Observer for animations - Lightweight
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up');
+            sectionObserver.unobserve(entry.target);
+        }
     });
-} else {
-    setTimeout(setupIntersectionObservers, 1500);
-}
+}, observerOptions);
 
-function setupIntersectionObservers() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target); // Stop observing once animated
-            }
-        });
-    }, observerOptions);
-
-    // Observe all sections for animation
+// Observe sections - but only after initial render
+setTimeout(() => {
     document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
+        sectionObserver.observe(section);
     });
-}
+}, 100);
 
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
@@ -318,41 +315,34 @@ function typeWriter(element, text, speed = 100) {
 }
 */
 
-// Keep hero title static for better performance
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        // Title stays as-is, no animation for better TBT
-        heroTitle.style.opacity = '1';
-    }
-});
+// Hero title is visible by default (no animation needed for performance)
+// Removed to reduce TBT
 
-// Counter animation for stats - Optimized with requestIdleCallback
+// Counter animation for stats - Lightweight and fast
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
     
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/\D/g, ''));
         const hasPlus = counter.textContent.includes('+');
-        let current = 0;
-        const increment = Math.ceil(target / 50); // Faster animation
+        const duration = 800; // Fixed duration
+        const startTime = performance.now();
         
-        const updateCounter = () => {
-            if (current < target) {
-                current = Math.min(current + increment, target);
-                counter.textContent = current + (hasPlus ? '+' : '');
+        const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = Math.floor(progress * target);
+            
+            counter.textContent = current + (hasPlus ? '+' : '');
+            
+            if (progress < 1) {
                 requestAnimationFrame(updateCounter);
             } else {
                 counter.textContent = target + (hasPlus ? '+' : '');
             }
         };
         
-        // Use requestIdleCallback for non-critical animation
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(() => updateCounter());
-        } else {
-            setTimeout(updateCounter, 100);
-        }
+        requestAnimationFrame(updateCounter);
     });
 }
 
@@ -360,28 +350,20 @@ function animateCounters() {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            animateCounters();
+            // Defer the animation slightly to not block initial render
+            setTimeout(() => animateCounters(), 50);
             statsObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 });
 
-// Defer observer setup
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-        const statsSection = document.querySelector('.hero-stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-    });
-} else {
-    setTimeout(() => {
-        const statsSection = document.querySelector('.hero-stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-    }, 1000);
-}
+// Setup observer after initial render
+setTimeout(() => {
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+}, 200);
 
 // Skill tags and project cards hover - Use CSS only for better performance
 // Removed JavaScript hover effects - now handled by CSS
@@ -453,66 +435,36 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize everything when DOM is loaded - OPTIMIZED for TBT
-document.addEventListener('DOMContentLoaded', () => {
-    // Defer non-critical animations using requestIdleCallback
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-            initNonCriticalAnimations();
+// Minimal initialization - Keep TBT low
+// Sections animate via CSS automatically
+// No heavy operations on page load
+
+// Smooth scroll to top functionality - Created after page load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const scrollToTopBtn = document.createElement('button');
+        scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        scrollToTopBtn.className = 'scroll-to-top';
+        scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-    } else {
-        setTimeout(initNonCriticalAnimations, 2000);
-    }
+        
+        document.body.appendChild(scrollToTopBtn);
+        
+        // Show/hide - Throttled
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(() => {
+                    scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+                    scrollTimeout = null;
+                }, 150);
+            }
+        }, { passive: true });
+    }, 500);
 });
-
-function initNonCriticalAnimations() {
-    try {
-        // Simplified section animations - use CSS instead
-        document.querySelectorAll('section').forEach((section) => {
-            section.classList.add('section-visible');
-        });
-    } catch (error) {
-        console.error('Error in animations:', error);
-    }
-}
-
-// Smooth scroll to top functionality - Deferred for performance
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => createScrollToTopButton());
-} else {
-    setTimeout(createScrollToTopButton, 2000);
-}
-
-function createScrollToTopButton() {
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollToTopBtn.className = 'scroll-to-top';
-    scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
-    
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    document.body.appendChild(scrollToTopBtn);
-    
-    // Show/hide scroll to top button - Throttled
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-            scrollTimeout = setTimeout(() => {
-                if (window.pageYOffset > 300) {
-                    scrollToTopBtn.classList.add('visible');
-                } else {
-                    scrollToTopBtn.classList.remove('visible');
-                }
-                scrollTimeout = null;
-            }, 100);
-        }
-    }, { passive: true });
-}
 
 // FAQ Accordion Functionality
 document.addEventListener('DOMContentLoaded', () => {
