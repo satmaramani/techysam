@@ -118,19 +118,436 @@
         .btn-primary { background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 600; transition: all 0.3s; }
         /* Award images should now be visible */
         
-        /* DEBUG: Add debugging styles */
+        /* Accessibility Improvements */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Enhanced Focus Indicators */
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 3px solid #2563eb;
+            outline-offset: 2px;
+        }
+        
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .btn-primary {
+                background: #000;
+                color: #fff;
+                border: 2px solid #fff;
+            }
+            
+            .btn-secondary {
+                background: #fff;
+                color: #000;
+                border: 2px solid #000;
+            }
+            
+            .navbar {
+                background: #fff;
+                border-bottom: 2px solid #000;
+            }
+            
+            .hero-title,
+            .section-title {
+                color: #000;
+            }
+            
+            .hero-subtitle,
+            .section-subtitle {
+                color: #333;
+            }
+            
+            .award-item,
+            .project-card,
+            .space-card {
+                border: 2px solid #000;
+            }
+            
+            .timeline-item::before {
+                background: #000;
+                border: 2px solid #fff;
+            }
+            
+            .skill-tag {
+                background: #000;
+                color: #fff;
+                border: 1px solid #fff;
+            }
+        }
+        
+        /* Enhanced Color Contrast for Better Readability */
+        .hero-title,
+        .section-title {
+            color: #1a202c;
+        }
+        
+        .hero-subtitle,
+        .section-subtitle {
+            color: #2d3748;
+        }
+        
+        .text-muted {
+            color: #4a5568;
+        }
+        
+        /* Focus indicators with better contrast */
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 3px solid #2563eb;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Form Accessibility Improvements */
+        .required {
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .help-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        input[aria-invalid="true"],
+        textarea[aria-invalid="true"] {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+        
+        input[aria-invalid="true"]:focus,
+        textarea[aria-invalid="true"]:focus {
+            outline-color: #dc2626;
+        }
+        
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Touch Target Improvements */
+        .btn,
+        .btn-primary,
+        .btn-secondary,
+        .award-link,
+        .profile-link,
+        .social-link,
+        .nav-menu a {
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+        }
+        
+        .faq-question {
+            min-height: 44px;
+            padding: 1rem;
+            cursor: pointer;
+        }
+        
+        .scroll-to-top {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            min-height: 48px;
+        }
+        
+        /* Mobile-specific touch improvements */
+        @media (max-width: 768px) {
+            .btn,
+            .btn-primary,
+            .btn-secondary {
+                min-height: 48px;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .nav-menu a {
+                min-height: 48px;
+                padding: 1rem;
+            }
+            
+            .award-link,
+            .profile-link {
+                min-height: 48px;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+        
+        /* Loading State Improvements */
         .award-photo {
-            border: 2px solid red !important;
-            background: yellow !important;
-            min-height: 100px !important;
+            background: #f3f4f6;
+            position: relative;
         }
         
-        .award-photo[src*="webp"] {
-            border-color: green !important;
+        .award-photo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e5e7eb;
+            border-top: 2px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            opacity: 1;
+            transition: opacity 0.3s ease;
         }
         
-        .award-photo[src*="jpg"] {
-            border-color: blue !important;
+        .award-photo.loaded::before {
+            opacity: 0;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #6b7280;
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+        
+        .loading-text.loaded {
+            display: none;
+        }
+        
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            background: #f8fafc;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .breadcrumb-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: '›';
+            margin: 0 0.5rem;
+            color: #6b7280;
+        }
+        
+        .breadcrumb-item a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .breadcrumb-item a:hover {
+            background: #e5e7eb;
+        }
+        
+        .breadcrumb-item a[aria-current="page"] {
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        /* Hide breadcrumb on mobile to save space */
+        @media (max-width: 768px) {
+            .breadcrumb {
+                display: none;
+            }
+        }
+        
+        /* Screen Reader Only Content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Advanced Focus Management */
+        .focus-trap {
+            outline: none;
+        }
+        
+        /* Enhanced Color Contrast */
+        .high-contrast {
+            filter: contrast(150%) brightness(110%);
+        }
+        
+        /* Advanced ARIA States */
+        [aria-expanded="true"]::after {
+            content: " (expanded)";
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        
+        [aria-expanded="false"]::after {
+            content: " (collapsed)";
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        
+        /* RTL (Right-to-Left) Language Support */
+        [dir="rtl"] {
+            text-align: right;
+        }
+        
+        [dir="rtl"] .nav-menu {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .breadcrumb-list {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .breadcrumb-item:not(:last-child)::after {
+            content: '‹';
+        }
+        
+        [dir="rtl"] .hero-content {
+            text-align: right;
+        }
+        
+        [dir="rtl"] .timeline-item {
+            text-align: right;
+        }
+        
+        [dir="rtl"] .timeline-item::before {
+            right: -8px;
+            left: auto;
+        }
+        
+        [dir="rtl"] .timeline-item::after {
+            right: -4px;
+            left: auto;
+        }
+        
+        /* Print Styles */
+        @media print {
+            * {
+                background: transparent !important;
+                color: black !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+            
+            .navbar,
+            .breadcrumb,
+            .scroll-to-top,
+            .hamburger,
+            .btn,
+            .contact-form {
+                display: none !important;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+                color: black;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+                color: black;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 2em;
+            }
+            
+            .hero {
+                page-break-after: always;
+            }
+            
+            a[href^="http"]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #666;
+            }
+            
+            .award-photo,
+            .profile-photo {
+                max-width: 200px;
+                height: auto;
+            }
+            
+            .container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
         }
     </style>
     
@@ -563,8 +980,14 @@
     </script>
 </head>
 <body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Live Region for Dynamic Content -->
+    <div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <div class="nav-profile-image">
@@ -574,20 +997,21 @@
                     </picture>
                 </div>
                 <span>Sampurna Atmaramani</span>
+                <span class="sr-only">Portfolio website navigation</span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#resume">Profile</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#hobbies">Hobbies</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#npm-packages">My NPM Packages</a></li>
-                <li><a href="#ai-spaces">My AI Spaces</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#home" role="menuitem" aria-current="page">Home</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#resume" role="menuitem">Profile</a></li>
+                <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
+                <li role="none"><a href="#skills" role="menuitem">Skills</a></li>
+                <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+                <li role="none"><a href="#hobbies" role="menuitem">Hobbies</a></li>
+                <li role="none"><a href="#awards" role="menuitem">Awards</a></li>
+                <li role="none"><a href="#npm-packages" role="menuitem">My NPM Packages</a></li>
+                <li role="none"><a href="#ai-spaces" role="menuitem">My AI Spaces</a></li>
+                <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -597,7 +1021,17 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol class="breadcrumb-list">
+            <li class="breadcrumb-item">
+                <a href="#home" aria-current="page">Home</a>
+            </li>
+        </ol>
+    </nav>
+
     <!-- Hero Section -->
+    <main id="main-content" role="main">
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
@@ -1510,31 +1944,40 @@
 
                 <div class="contact-form">
                     <h3>Send a Message</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" role="form" aria-label="Contact form">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Name <span class="required" aria-label="required">*</span></label>
+                            <input type="text" id="name" name="name" required aria-describedby="name-error name-help" aria-invalid="false" autocomplete="name">
+                            <div id="name-error" class="error-message" role="alert" aria-live="polite"></div>
+                            <div id="name-help" class="help-text">Enter your full name</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email <span class="required" aria-label="required">*</span></label>
+                            <input type="email" id="email" name="email" required aria-describedby="email-error email-help" aria-invalid="false" autocomplete="email">
+                            <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+                            <div id="email-help" class="help-text">Enter a valid email address</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject">Subject <span class="required" aria-label="required">*</span></label>
+                            <input type="text" id="subject" name="subject" required aria-describedby="subject-error subject-help" aria-invalid="false" autocomplete="off">
+                            <div id="subject-error" class="error-message" role="alert" aria-live="polite"></div>
+                            <div id="subject-help" class="help-text">Brief description of your message</div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message">Message <span class="required" aria-label="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required aria-describedby="message-error message-help" aria-invalid="false" placeholder="Please describe your inquiry in detail..."></textarea>
+                            <div id="message-error" class="error-message" role="alert" aria-live="polite"></div>
+                            <div id="message-help" class="help-text">Please provide as much detail as possible</div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
+                        <button type="submit" class="btn btn-primary" aria-describedby="submit-help">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
                             Send Message
                         </button>
+                        <div id="submit-help" class="help-text">All fields marked with * are required</div>
                     </form>
                 </div>
             </div>
@@ -1637,9 +2080,10 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo" aria-label="Site footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
