@@ -1,0 +1,76 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 900] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 3160 >>
+stream
+BT /F1 10 Tf 50 810 Td
+(SAMPURNA ATMARAMANI) Tj
+0 -14 Td (Senior AI Solutions Architect | Generative AI | Agentic AI | Cloud Architecture) Tj
+0 -14 Td (Pune, India | Email: s.atmaramani@gmail.com | Phone: +91 9323895896) Tj
+0 -14 Td (LinkedIn: linkedin.com/in/sampurna | GitHub: github.com/satmaramani) Tj
+0 -14 Td () Tj
+0 -14 Td (PROFESSIONAL SUMMARY) Tj
+0 -14 Td (AWS Certified Solutions Architect - Professional with 20 years of enterprise architecture experience.) Tj
+0 -14 Td (Specialized in Generative AI, Agentic AI, LLM orchestration, AI agents, RAG, and semantic retrieval.) Tj
+0 -14 Td (Hands-on in Python AI engineering, vector databases, cloud-native architecture on AWS and Azure.) Tj
+0 -14 Td () Tj
+0 -14 Td (CORE AI & ARCHITECTURE SKILLS) Tj
+0 -14 Td (Generative AI, Agentic AI, Multi-Agent Systems, LLMOps, Prompt Engineering, AI Automation) Tj
+0 -14 Td (RAG, Vector RAG, Vectorless RAG, Embedding Pipelines, Semantic Search, Knowledge Retrieval) Tj
+0 -14 Td (LangChain, LangGraph, CrewAI, Semantic Kernel, AutoGen, LlamaIndex, OpenAI API, Ollama) Tj
+0 -14 Td (AWS Bedrock, Azure AI Foundry, AWS CDK, Microservices, Serverless, Event-Driven Systems) Tj
+0 -14 Td () Tj
+0 -14 Td (TECH STACK) Tj
+0 -14 Td (Python, JavaScript, TypeScript, Node.js, React.js, Next.js, Nest.js, Pandas, NumPy, Scikit-Learn) Tj
+0 -14 Td (PostgreSQL, MySQL, MongoDB, PgVector, FAISS, Docker, Kubernetes, GitHub Actions, Jenkins) Tj
+0 -14 Td () Tj
+0 -14 Td (PROFESSIONAL EXPERIENCE) Tj
+0 -14 Td (McFadyen Digital | Senior UI Architect & AI Engineer | Aug 2025 - Present) Tj
+0 -14 Td (- Architecting Generative AI and Agentic AI platforms using microservices and event-driven cloud patterns.) Tj
+0 -14 Td (- Built AI code review and AI mock interview platforms with Python, RAG, PgVector, and OpenAI APIs.) Tj
+0 -14 Td (Synechron Technologies | Senior Architect & Full Stack Lead | Aug 2023 - Aug 2025) Tj
+0 -14 Td (- Led cloud-native platform architecture integrating Node.js services with Python AI services.) Tj
+0 -14 Td (- Implemented Agentic AI workflows with CrewAI and LangChain on AWS.) Tj
+0 -14 Td (Infogain India Pvt Ltd | Technology Lead / Architect | Jan 2021 - Aug 2023) Tj
+0 -14 Td (- Architected micro frontend and cloud solutions on Azure with AI chatbot integrations.) Tj
+0 -14 Td (Honey Computing Services | Technical Project Manager | Jul 2014 - Jan 2021) Tj
+0 -14 Td (Cybage Software | Software System Analyst | Jul 2006 - Jul 2014) Tj
+0 -14 Td (People Interactive \(Shaadi.com\) | Software Engineer | Sep 2005 - Jul 2006) Tj
+0 -14 Td () Tj
+0 -14 Td (KEY PROJECTS) Tj
+0 -14 Td (AI Mock Interview Platform | OpenAI APIs | PgVector | RAG | Semantic Search) Tj
+0 -14 Td (AI Code Review Agent | Ollama | Phi3/Phi4 | Docker Microservices | Python) Tj
+0 -14 Td (Cucumber JS Distributed Testing Framework | Parallel Sharding | AWS S3 Reporting) Tj
+0 -14 Td () Tj
+0 -14 Td (CERTIFICATIONS) Tj
+0 -14 Td (AWS Certified Solutions Architect - Professional) Tj
+0 -14 Td (Cybage Certified Trainer | Udemy Instructor \(Average Rating: 4.6\)) Tj
+0 -14 Td () Tj
+0 -14 Td (Education: MS - Software Engineering \(BITS Pilani\) | Bachelor of Information Technology) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3523
+%%EOF

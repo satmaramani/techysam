@@ -507,6 +507,15 @@ section {
     justify-content: center;
 }
 
+.resume-actions {
+    margin-top: 1.25rem;
+}
+
+.resume-actions .btn {
+    width: 100%;
+    justify-content: center;
+}
+
 /* Hero Resume Button */
 .resume-btn {
     background: #10b981;
@@ -887,6 +896,29 @@ section {
     color: #1d4ed8;
 }
 
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.featured-project {
+    border: 2px solid #f59e0b;
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+
+.project-badge {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
 /* Hobbies Section */
 .hobbies {
     background: #f8fafc;
@@ -1060,6 +1092,10 @@ section {
 .npm-package-link:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(203, 56, 55, 0.3);
+}
+
+.npm-package-link + .npm-package-link {
+    margin-top: 0.75rem;
 }
 
 /* Awards & Recognition Section */
@@ -1388,6 +1424,7 @@ section {
 .social-link.huggingface { background: linear-gradient(135deg, #ff9d00, #e67e00); }
 .social-link.quora { background: linear-gradient(135deg, #b92b27, #8b1f1c); }
 .social-link.portfolio-alt { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.social-link.dockerhub { background: linear-gradient(135deg, #2496ed, #0b5fa5); }
 
 .social-link:hover {
     transform: translateY(-2px);
